@@ -1,0 +1,2 @@
+# MVCProjeKampi
+MVCProjeKampiSözlükProjesi
