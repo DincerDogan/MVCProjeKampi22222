@@ -1,0 +1,39 @@
+﻿@using EntityLayer.Concreate
+@model List<Content>
+@{
+    ViewBag.Title = "GetAllContent";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+@using(Html.BeginForm("GetAllContent","Content",FormMethod.Post))
+            {
+                
+                   
+                    @Html.TextBox("p" )
+                    <input type="submit" class="btn btn-info" value="Ara" />
+                
+            }
+<br />
+
+
+   <table class="table table-bordered">
+       <tr>
+           <th>#</th>
+           <th>Yazilar</th>
+           <th>Baslık Adı</th>
+       </tr>
+       <tbody>
+           @foreach (var item in Model)
+           {
+               <tr>
+                   <td>@item.ContentId</td>
+                   <td>@item.ContentText</td>
+                   <td>@item.Heading.HeadingName</td>
+
+               </tr>
+           }
+           </tbody>
+   </table>
+
+
+

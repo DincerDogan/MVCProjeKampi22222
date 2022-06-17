@@ -1,0 +1,149 @@
+﻿@using EntityLayer.Concreate
+@model IEnumerable<Message>
+@{
+    ViewBag.Title = "MessageInbox";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+
+<body class="hold-transition sidebar-mini">
+
+    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Header (Page header) -->
+   
+    <!-- Main content -->
+    <br />
+    <section class="content">
+        <div class="row">
+            @Html.Action("MessageBoxPartial", "Contact")
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Inbox</h3>
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm">
+                                @using (Html.BeginForm("MessageInbox", "Message", FormMethod.Get))
+                                {
+
+                                    <div class="input-group-append">
+                                        <input type="text" class="form-control" name="text" placeholder="Search Mail">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+                        <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    @using (Html.BeginForm("MessageInbox", "Message", FormMethod.Post))
+                    {
+                        <div class="card-body p-0">
+                            <div class="mailbox-controls">
+                                <!-- Check all button -->
+                                <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                                    <i class="far fa-square"></i>
+                                </button>
+                                <div class="btn-group">
+
+                                    <button type="submit" value="Delete" class="btn btn-default btn-sm" onclick="return confirm('Are You Sure')"><i class="far fa-trash-alt"></i></button>
+
+
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
+
+
+
+
+                                </div>
+                                <!-- /.btn-group -->
+                                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
+                                <div class="float-right">
+                                    1-50/200
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+                                    </div>
+                                    <!-- /.btn-group -->
+                                </div>
+                                <!-- /.float-right -->
+                            </div>
+                            <div class="table-responsive mailbox-messages">
+
+
+                                <table class="table table-hover table-striped">
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <div class="icheck-primary">
+                                                        <input type="checkbox" name="MessageId" value="@item.MessageId" />
+                                                        <label for="check1"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="mailbox-star"><a href="/Message/GetInboxDetails/@item.MessageId"><i class="fas fa-star text-warning"></i></a></td>
+                                                <td class="mailbox-name"><a href="/Message/GetInboxDetails/@item.MessageId">@item.SenderMail</a></td>
+                                                <td class="mailbox-subject">
+                                                    <b>@item.Subject</b>  <span style="margin-left:10px;">@item.MessageContent</span>
+                                                </td>
+                                                <td class="mailbox-attachment"></td>
+                                                <td class="mailbox-date">@DateTime.Parse(item.MessageDate.ToString()).ToString("dd-MMM-yyyy")</td>
+
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                                <!-- /.table -->
+                            </div>
+                            <!-- /.mail-box-messages -->
+                        </div>
+                        <div class="card-footer p-0">
+                            <div class="mailbox-controls">
+                                <!-- Check all button -->
+                                <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                                    <i class="far fa-square"></i>
+                                </button>
+                                <div class="btn-group">
+                                    <button type="submit"  value="Delete" onclick="return confirm('Are You Sure')" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
+                                </div>
+                                <!-- /.btn-group -->
+                                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
+                                <div class="float-right">
+                                    1-50/200
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+                                    </div>
+                                    <!-- /.btn-group -->
+                                </div>
+                                <!-- /.float-right -->
+                            </div>
+                        </div>
+
+                    }
+
+                    <!-- /.card-body -->
+
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+</body>
+</html>
+

@@ -1,0 +1,29 @@
+﻿@model EntityLayer.Concreate.Admin
+@{
+    ViewBag.Title = "EditAdmin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+@using (Html.BeginForm("EditAdmin", "Admin", FormMethod.Post))
+{
+<div class="form-group">
+    
+    @Html.HiddenFor(x => x.AdminId, new { @class = "form-control" })
+    
+    @Html.Label("Kullanici Adi")
+    @Html.TextBoxFor(x => x.AdminUserName, new { @class = "form-control" })
+    @*@Html.ValidationMessageFor(x => x.CategoryName)*@
+    <br /><br />
+    @Html.Label("Sifre")
+    @Html.TextBoxFor(x => x.AdminPassword, new { @class = "form-control" })
+    @*@Html.ValidationMessageFor(x => x.AdminPassword)*@
+    <br /><br />
+    @Html.Label("Role")
+    @Html.DropDownListFor(x=>x.AdminId,(List<SelectListItem>)ViewBag.roles,new {@class="form-control"})
+    <br />
+
+    <button class="btn btn-info">Guncelle</button>
+</div>
+}
+
